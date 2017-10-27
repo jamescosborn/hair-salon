@@ -24,3 +24,5 @@ namespace HairSalon.Models.Tests
 
       Assert.AreEqual(0, result);
     }
+  }
+}
