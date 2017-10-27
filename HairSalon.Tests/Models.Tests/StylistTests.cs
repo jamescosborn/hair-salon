@@ -44,5 +44,16 @@ namespace HairSalon.Models.Tests
 
       Assert.AreEqual(false, result);
     }
+    [TestMethod]
+    public void Save_SavesStylistToDatabase_DatabaseSaved()
+    {
+      Stylist localStylist = new Stylist("Zeus");
+      localStylist.Save();
+      Stylist databaseStylist = Stylist.GetAll()[0];
+
+      bool result = localStylist.HasSamePropertiesAs(databaseStylist);
+
+      Assert.AreEqual(true, result);
+    }
   }
 }
