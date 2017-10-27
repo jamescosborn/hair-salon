@@ -8,14 +8,14 @@ namespace HairSalon.Models
   {
     public int Id {get; private set;}
     public string Name {get; private set;}
-    public int Age {get; private set;}
-    public string Music {get; private set;}
+    // public int Age {get; private set;}
+    // public string Music {get; private set;}
 
-    public Stylist(string name, int age, string music, int id = 0)
+    public Stylist(string name, int id = 0)
     {
       Name = name;
-      Age = age;
-      Music = music;
+      // Age = age;
+      // Music = music;
       Id = id;
     }
 
@@ -33,9 +33,9 @@ namespace HairSalon.Models
       {
         int id = rdr.GetInt32(0);
         string name = rdr.GetString(1);
-        int age = rdr.GetInt32(2);
-        string music = rdr.GetString(3);
-        Stylist newStylist = new Stylist(name, age, music, id);
+        // int age = rdr.GetInt32(2);
+        // string music = rdr.GetString(3);
+        Stylist newStylist = new Stylist(name, id);
         output.Add(newStylist);
       }
 
@@ -62,6 +62,13 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       //  Client.ClearAll();
+
+    }
+    public bool HasSamePropertiesAs(Stylist other)
+    {
+      return (
+        this.Id == other.Id &&
+        this.Name == other.Name);
     }
   }
 }

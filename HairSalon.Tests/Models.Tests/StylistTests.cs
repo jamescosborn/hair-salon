@@ -24,5 +24,15 @@ namespace HairSalon.Models.Tests
 
       Assert.AreEqual(0, result);
     }
+    [TestMethod]
+    public void HasSamePropertiesAs_BothHaveSameProperties_True()
+    {
+      Stylist stylist1 = new Stylist("Zeus");
+      Stylist stylist2 = new Stylist("Zeus");
+
+      bool result = stylist1.HasSamePropertiesAs(stylist2);
+
+      Assert.AreEqual(true, result);
+    }
   }
 }
