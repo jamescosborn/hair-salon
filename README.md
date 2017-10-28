@@ -10,6 +10,11 @@ Description: The employee should be able to see a list of stylists.
 Example Input: User visits page.
 Example Output: Tony, Stephanie, Lisa, Melissa
 
+
+Description: The employee should be able to add stylists to the system when they are hired.
+Example Input: Add: Shadowbeast
+Example Output: Stylists: Tony, Stephanie, Lisa, Melissa, Shadowbeast
+
 Description: The employee should be able to click on any stylist to see their details.
 Example Input: User clicks Melissa.
 Example Output: Melissa Age: 99 Favorite music: surf
@@ -17,10 +22,6 @@ Example Output: Melissa Age: 99 Favorite music: surf
 Description: The employee should be able to see a list of a stylist's clients whenever they click on a stylist.
 Example Input: User clicks Melissa.
 Example Output: Clients: Mon Mothma, Chewbacca, Bodhi Rook
-
-Description: The employee should be able to add stylists to the system when they are hired.
-Example Input: Add: Shadowbeast
-Example Output: Stylists: Tony, Stephanie, Lisa, Melissa, Shadowbeast
 
 Description: The employee should be able to add a client to a stylist.
 Example Input: Add Client Bob to Stylist Lisa.
