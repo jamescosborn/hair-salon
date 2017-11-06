@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
@@ -18,16 +19,16 @@ namespace HairSalon.Models
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
-        {
+      {
         return false;
-        }
-        else
-        {
-          Client newClient = (Client) otherClient;
-          bool idEquality = (this.Id == newClient.Id);
-          bool nameEquality = (this.Name == newClient.Name);
-          return (idEquality && nameEquality);
-        }
+      }
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool idEquality = (this.Id == newClient.Id);
+        bool nameEquality = (this.Name == newClient.Name);
+        return (idEquality && nameEquality);
+      }
     }
 
     public override int GetHashCode()
@@ -42,28 +43,31 @@ namespace HairSalon.Models
         this.Name == other.Name);
     }
 
+    // CREATE
+
     public void Save()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
+     {
+       MySqlConnection conn = DB.Connection();
+       conn.Open();
 
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (name) VALUES (@name);";
+       var cmd = conn.CreateCommand() as MySqlCommand;
+       cmd.CommandText = @"INSERT INTO clients (name) VALUES (@name);";
 
-      MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@name";
-      name.Value = this.Name;
-      cmd.Parameters.Add(name);
+       MySqlParameter name = new MySqlParameter();
+       name.ParameterName = "@name";
+       name.Value = this.Name;
+       cmd.Parameters.Add(name);
 
-      cmd.ExecuteNonQuery();
-      Id = (int) cmd.LastInsertedId;
+       cmd.ExecuteNonQuery();
+       Id = (int) cmd.LastInsertedId;
 
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
+       conn.Close();
+       if (conn != null)
+       {
+         conn.Dispose();
+       }
+     }
+    // READ
 
     public static List<Client> GetAll()
     {
@@ -72,7 +76,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand();
-      cmd.CommandText = @"SELECT * FROM client;";
+      cmd.CommandText = @"SELECT * FROM clients;";
       MySqlDataReader rdr = cmd.ExecuteReader();
       while(rdr.Read())
       {
@@ -85,10 +89,12 @@ namespace HairSalon.Models
       conn.Close();
       if(conn != null)
       {
-      conn.Dispose();
+        conn.Dispose();
       }
       return allClients;
     }
+
+    // DESTROY
 
     public static void ClearAll()
     {
@@ -104,7 +110,6 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
-      Client.ClearAll();
     }
   }
 }
