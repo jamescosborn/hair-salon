@@ -10,7 +10,7 @@ namespace HairSalon.Models.Tests
   {
     public StylistTests()
     {
-      DBConfiguration.ConnectionString = "server=localhost; user id=root; password=root; port=3306; database=hair_salon_test;";
+      DBConfiguration.ConnectionString = "server=localhost; user id=root; password=root; port=3306; database=hair_salon2_test;";
     }
     public void Dispose()
     {
