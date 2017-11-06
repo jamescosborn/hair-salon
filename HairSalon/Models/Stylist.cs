@@ -19,6 +19,7 @@ namespace HairSalon.Models
       Id = id;
     }
 
+    // Shows a list of all Stylists
     public static List<Stylist> GetAll()
     {
       List<Stylist> output = new List<Stylist> {};
@@ -70,6 +71,8 @@ namespace HairSalon.Models
         this.Id == other.Id &&
         this.Name == other.Name);
     }
+
+    // Adds a new Stylist to the Salon
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
@@ -92,6 +95,8 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
+
+    // Selects a Stylist to view their info
     public static Stylist FindById(int searchId)
     {
       MySqlConnection conn = DB.Connection();
@@ -124,25 +129,24 @@ namespace HairSalon.Models
       return output;
     }
 
-  public override bool Equals(System.Object otherStylist)
-  {
-    if (!(otherStylist is Stylist))
+    public override bool Equals(System.Object otherStylist)
     {
-      return false;
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool idEquality = (this.Id == newStylist.Id);
+        bool nameEquality = (this.Name == newStylist.Name);
+        return (idEquality && nameEquality);
+      }
     }
-    else
+
+    public override int GetHashCode()
     {
-      Stylist newStylist = (Stylist) otherStylist;
-      bool idEquality = (this.Id == newStylist.Id);
-      bool nameEquality = (this.Name == newStylist.Name);
-      return (idEquality && nameEquality);
+      return this.Id.GetHashCode();
     }
-  }
-
-  public override int GetHashCode()
-  {
-    return this.Id.GetHashCode();
-  }
-
   }
 }

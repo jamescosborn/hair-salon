@@ -60,5 +60,18 @@ namespace HairSalon.Models.Tests
 
       Assert.AreEqual(true,Client.GetAll().Count==1);
     }
+    [TestMethod]
+    public void Update_UpdateClientInDatabase_ClientWithNewInfo()
+    {
+      Client initialClient = new Client("Tony", 0);
+      initialClient.Save();
+      Client newClient = new Client("Ronnie", 0, initialClient.Id);
+      initialClient.Update(newClient);
+      Client updatedClient = Client.Find(initialClient.Id);
+
+      bool result = updatedClient.HasSamePropertiesAs(newClient);
+
+      Assert.AreEqual(true, result);
+    }
   }
 }
