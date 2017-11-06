@@ -18,6 +18,15 @@ This application contains only back-end functionality.
 -In Mono Command Prompt, type `dotnet test`  
 -Verify all tests are passing on the back-end
 
+### Database Reconstruction
+
+To recreate this project's database, use the following commands in SQL:
+
+CREATE DATABASE james_osborn_test;  
+USE james_osborn_test;  
+CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));  
+CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT);  
+
 ### Specs
 
 #### Description: The employee should be able to see a list of stylists.  
