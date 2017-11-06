@@ -60,6 +60,19 @@ namespace HairSalon.Models.Tests
 
       Assert.AreEqual(true,Client.GetAll().Count==1);
     }
+
+    [TestMethod]
+    public void Find_GetsSpecificClientFromDatabase_Client()
+    {
+      Client localClient = new Client("Ralphie");
+      localClient.Save();
+      Client databaseClient = Client.Find(localClient.Id);
+
+      bool result = localClient.HasSamePropertiesAs(databaseClient);
+
+      Assert.AreEqual(true, result);
+    }
+
     [TestMethod]
     public void Update_UpdateClientInDatabase_ClientWithNewInfo()
     {
@@ -70,6 +83,26 @@ namespace HairSalon.Models.Tests
       Client updatedClient = Client.Find(initialClient.Id);
 
       bool result = updatedClient.HasSamePropertiesAs(newClient);
+
+      Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void DeleteClient_RemovesEntryFromDatabase_EntryRemoved()
+    {
+      Client client1 = new Client("Chuckie");
+      client1.Save();
+      Client client2 = new Client("Jason");
+      client2.Save();
+      Client client3 = new Client("Freddie");
+      client3.Save();
+      Client.Delete(client2.Id);
+      List<Client> remainingClients = Client.GetAll();
+
+      bool result = (
+        client1.HasSamePropertiesAs(remainingClients[0]) &&
+        client3.HasSamePropertiesAs(remainingClients[1])
+      );
 
       Assert.AreEqual(true, result);
     }

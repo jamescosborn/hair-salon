@@ -187,5 +187,26 @@ namespace HairSalon.Models
         this.Name == other.Name &&
         this.StylistId == other.StylistId);
     }
+
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+      {
+        return false;
+      }
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool idEquality = (this.Id == newClient.Id);
+        bool nameEquality = (this.Name == newClient.Name);
+        return (idEquality && nameEquality);
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.Id.GetHashCode();
+    }
+
   }
 }
